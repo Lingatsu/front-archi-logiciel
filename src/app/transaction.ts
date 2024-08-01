@@ -1,10 +1,11 @@
-export interface Catalogtransaction {
+export interface Transaction {
   id: number;
   name: string;
   city: string;
   state: string;
   photo: string;
   availableUnits: number;
-  wifi: boolean;
-  laundry: boolean;
+  color: string;
+  fragrance: string;
+  season: string;
 }

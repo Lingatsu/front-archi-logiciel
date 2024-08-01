@@ -1,15 +1,16 @@
 import {Component} from '@angular/core';
 import { CatalogComponent } from './catalog/catalog.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   template: `
     <main>
-      <header class="brand-name">
-        <img class="brand-logo" src="../assets/logo.webp" width="50" alt="logo" aria-hidden="true">
-      </header>
+        <header class="brand-name">
+          <a [routerLink]="['/']"><img class="brand-logo" src="../assets/logo.webp" width="50px" alt="logo" aria-hidden="true"></a>
+        </header>
       <section class="content">
-        <app-catalog></app-catalog>
+        <router-outlet></router-outlet>
       </section>
     </main>
   `,
@@ -17,6 +18,7 @@ import { CatalogComponent } from './catalog/catalog.component';
   styleUrls: ['./app.component.css'],
   imports: [
     CatalogComponent,
+    RouterModule,
   ],
   standalone: true
 })

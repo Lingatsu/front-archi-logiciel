@@ -1,7 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {TransactionComponent} from '../transaction/transaction.component';
-import {Catalogtransaction} from "../catalogtransaction";
+import {Transaction} from "../transaction";
+import { TransactionService } from "../transaction.service";
 
 @Component({
   selector: 'app-catalog',
@@ -13,12 +14,14 @@ import {Catalogtransaction} from "../catalogtransaction";
   template: `
     <section>
       <form>
-        <input type="text" placeholder="Filter by city">
-        <button class="primary" type="button">Search</button>
+        <input type="text" placeholder="Filter by city" #filter>
+        <button class="primary" type="button" (click)="filterResults(filter.value)">Search</button>
       </form>
     </section>
     <section class="results">
-      <app-transaction [catalogTransaction]="catalogtransaction"></app-transaction>
+      <app-transaction *ngFor="let transaction of filteredFlowerList"
+                       [transaction]="transaction">
+      </app-transaction>
     </section>
   `,
   styleUrls: ['./catalog.component.css']
@@ -26,14 +29,22 @@ import {Catalogtransaction} from "../catalogtransaction";
 export class CatalogComponent {
   readonly baseUrl = 'https://angular.io/assets/images/tutorials/faa';
 
-  catalogtransaction: Catalogtransaction = {
-    id: 9999,
-    name: 'Test Home',
-    city: 'Test city',
-    state: 'ST',
-    photo: `${this.baseUrl}/example-house.jpg`,
-    availableUnits: 99,
-    wifi: true,
-    laundry: false,
+  transactionList: Transaction[] = [];
+  filteredFlowerList: Transaction[] = [];
+  transactionService: TransactionService = inject(TransactionService)
+
+  constructor() {
+    this.transactionList = this.transactionService.getAllTransactions();
+    this.filteredFlowerList = this.transactionList;
+  }
+
+  filterResults(text: string) {
+    if (!text) {
+      this.filteredFlowerList = this.transactionList;
+    }
+
+    this.filteredFlowerList = this.transactionList.filter(
+      transaction => transaction?.name.toLowerCase().includes(text.toLowerCase())
+    );
   }
 }
