@@ -36,7 +36,7 @@ export class DetailsComponent {
   transaction: Transaction | undefined;
 
   constructor() {
-    const transactionId = parseInt(this.route.snapshot.params['id'], 10);
+    const transactionId = this.route.snapshot.params['id'];
     this.transactionService.getTransactionById(transactionId).then(transaction =>
     {
       this.transaction = transaction;

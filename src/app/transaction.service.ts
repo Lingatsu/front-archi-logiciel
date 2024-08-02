@@ -12,7 +12,7 @@ export class TransactionService {
     return await data.json() ?? [];
   }
 
-  async getTransactionById(id: number): Promise<Transaction | undefined> {
+  async getTransactionById(id: string): Promise<Transaction | undefined> {
     const data = await fetch(`${this.url}/${id}`);
     return await data.json() ?? {};
   }
