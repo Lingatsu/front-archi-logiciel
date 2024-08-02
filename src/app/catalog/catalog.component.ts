@@ -34,8 +34,10 @@ export class CatalogComponent {
   transactionService: TransactionService = inject(TransactionService)
 
   constructor() {
-    this.transactionList = this.transactionService.getAllTransactions();
-    this.filteredFlowerList = this.transactionList;
+    this.transactionService.getAllTransactions().then((transactionList: Transaction[]) => {
+      this.transactionList = transactionList;
+      this.filteredFlowerList = transactionList;
+    });
   }
 
   filterResults(text: string) {

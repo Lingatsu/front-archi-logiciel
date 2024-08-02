@@ -1,11 +1,8 @@
 export interface Transaction {
-  id: number;
+  id: string;
   name: string;
-  city: string;
-  state: string;
-  photo: string;
-  availableUnits: number;
-  color: string;
-  fragrance: string;
-  season: string;
+  location: string;
+  image: string;
+  quantity: number;
+  price: number;
 }

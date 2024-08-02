@@ -9,9 +9,9 @@ import {RouterLink} from "@angular/router";
   imports: [CommonModule, RouterLink],
   template: `
     <section class="listing">
-      <img class="listing-photo" [src]="transaction.photo" alt="Exterior photo of {{transaction.name}}">
+      <img class="listing-photo" [src]="transaction.image" alt="Exterior photo of {{transaction.name}}">
       <h2 class="listing-heading">{{ transaction.name }}</h2>
-      <p class="listing-location">{{ transaction.city}}, {{transaction.state }}</p>
+      <p class="listing-location">{{ transaction.location}}</p>
       <a [routerLink]="['/details', transaction.id]">Learn More</a>
     </section>
   `,
